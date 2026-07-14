@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Romi</title>
+    <title>Para Romi 🇯🇲</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <audio id="musicaFondo" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
-    <!-- Botón S.O.S (Siempre visible después del inicio) -->
+    <!-- Botones Flotantes (S.O.S, Buzón y Modo Madrugada) -->
     <a href="https://wa.me/50688317018?text=¡S.O.S!%20Emergencia%20en%20Jamaica.%20Necesito%20que%20me%20digas%20algo%20lindo,%20cambio%20🌴❤️" target="_blank" id="btnSOS" class="btn-sos" style="display: none;">🛟 S.O.S</a>
-
-    <!-- NUEVO: Botón del Buzón -->
     <button id="btnAbrirBuzon" class="btn-buzon" style="display: none;">📬 Enviar Postal</button>
+    <button id="btnMadrugada" class="btn-luna" style="display: none;">🌙</button>
 
     <!-- FASE 1: Pantalla de Inicio -->
     <div id="pantallaInicio" class="pantalla-inicio">
@@ -25,116 +24,98 @@
         </div>
     </div>
 
-    <!-- FASE 2: Contenedor Principal -->
+    <!-- FASE 2: Contenedor Principal (TARJETA) -->
     <div class="scratch-container" id="contenedorPrincipal" style="display: none;">
         <div class="hidden-content" id="hiddenContent">
             <h2>Romi en Jamaica: <br> Tu aventura caribeña 🌴🇯🇲☀️</h2>
-            <p>Para la viajera más hermosa que mis ojos han visto, que el ritmo del reggae te envuelva en la playa y el calor del Caribe acaricie tu piel. Tienes unos ojos tan impresionantes que es un verdadero peligro perderme en ellos.</p>
-            <p>Allá brillará el sol, pero te aseguro que él y la luna mueren de envidia por la luz de tu sonrisa.</p>
-            <p class="firma">Con todo mi amor,<br>Diego</p>
+            
+            <div id="poemaPrincipal">
+                <p>Para la viajera más hermosa que mis ojos han visto, que el ritmo del reggae te envuelva en la playa y el calor del Caribe acaricie tu piel. Tienes unos ojos tan impresionantes que es un verdadero peligro perderme en ellos.</p>
+                <p>Allá brillará el sol, pero te aseguro que él y la luna mueren de envidia por la luz de tu sonrisa.</p>
+            </div>
+            
+            <p class="firma" id="firmaPrincipal">Con todo mi amor,<br>Diego</p>
 
-            <!-- TODOS LOS BOTONES VAN AQUÍ ADENTRO -->
-            <button id="btnCapsula" class="btn-sorpresa btn-capsula">⏳ Abrir Cápsula del Tiempo</button>
-            <button id="btnMasSorpresas" class="btn-sorpresa">Abrir mi equipaje extra 🧳</button>
-            <button id="btnContrato" class="btn-sorpresa" style="background-color: #7d3c98;">🎫 Boleto de Regreso VIP</button>
-            <button id="btnRadar" class="btn-sorpresa" style="background-color: #1a5276;">📡 Radar de Conexión</button>
+            <!-- CUADRÍCULA DE BOTONES ORDENADA -->
+            <div class="botones-grid">
+                <button id="btnCapsula" class="btn-sorpresa btn-capsula">⏳ Cápsula</button>
+                <button id="btnMasSorpresas" class="btn-sorpresa" style="background-color: #ce1126;">🧳 Equipaje extra</button>
+                <button id="btnContrato" class="btn-sorpresa" style="background-color: #7d3c98;">🎫 Boleto VIP</button>
+                <button id="btnRadar" class="btn-sorpresa" style="background-color: #1a5276;">📡 Radar</button>
+                <button id="btnHuella" class="btn-sorpresa" style="background-color: #d35400;">👆 Escáner</button>
+                <button id="btnPensamientos" class="btn-sorpresa" style="background-color: #2980b9;">💭 Pensamientos</button>
+                <button id="btnTension" class="btn-sorpresa" style="background-color: #111; color: #ff4d4d; border: 1px solid #ff4d4d;">⚠️ NO TOCAR</button>
+                <button id="btnBesos" class="btn-sorpresa" style="background-color: #e84393;">💋 Menú Besos</button>
+                <button id="btnBoveda" class="btn-sorpresa" style="background-color: #34495e; grid-column: span 2;">🔐 Archivo Confidencial</button>
+            </div>
         </div>
         <canvas id="scratchCanvas"></canvas>
     </div>
 
-    <!-- FASE 3: El Carrusel de Mensajes -->
+    <!-- ================= MODALES Y VENTANAS ================= -->
+
+    <!-- CARRUSEL -->
     <div id="modalSorpresas" class="modal">
         <div class="modal-content">
             <span class="cerrar" id="btnCerrar">&times;</span>
             <h3 id="tituloCarrusel">Secretos para leer a solas... 😏</h3>
             <p id="textoCarrusel" class="texto-carrusel">Mensaje 1</p>
-            <button id="btnIrACupones">Ver mis regalos de bienvenida 🎁</button>
+            <button id="btnIrACupones" style="display:none; margin-top:15px; padding:12px; background-color:#0b4b36; color:white; border:none; border-radius:8px; cursor:pointer; width:100%; font-weight:bold;">Ver mis regalos de bienvenida 🎁</button>
             <div class="controles-carrusel">
-                <button id="btnAnterior">◀ Anterior</button>
-                <span id="contador">1 / 5</span>
-                <button id="btnSiguiente">Siguiente ▶</button>
+                <button id="btnAnterior" style="background:transparent; border:2px solid #e5b13a; padding:8px; border-radius:5px; font-weight:bold; color:#0b4b36;">◀ Anterior</button>
+                <span id="contador" style="color:#0b4b36; font-weight:bold;">1 / 5</span>
+                <button id="btnSiguiente" style="background:transparent; border:2px solid #e5b13a; padding:8px; border-radius:5px; font-weight:bold; color:#0b4b36;">Siguiente ▶</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL CUPONES (Ahora con el Menú VIP) -->
+    <!-- CUPONES Y MENÚ VIP -->
     <div id="modalCupones" class="modal">
         <div class="modal-content cupones-bg">
             <span class="cerrar" id="btnCerrarCupones">&times;</span>
             <h3>Tus Cupones de Regreso 🎟️</h3>
             <div class="cupon">💆‍♀️ <b>Vale por:</b> Un masaje relajante post-vuelo para quitarte todo el cansancio.</div>
-            
-            <!-- Cupón Interactivo VIP -->
-            <div class="cupon cupon-interactivo" id="btnAbrirMenu">
-                🥩 <b>Vale por: Una Cena VIP</b><br>
-                <i>(Toca aquí para elegir tu platillo de bienvenida)</i> 👉
-            </div>
-            
-            <div class="cupon">🍿 <b>Vale por:</b> Una tarde de películas, chineos infinitos y cero interrupciones.</div>
+            <div class="cupon cupon-interactivo" id="btnAbrirMenu">🥩 <b>Vale por: Una Cena VIP</b><br><i>(Toca aquí para elegir tu platillo)</i> 👉</div>
+            <div class="cupon">🍿 <b>Vale por:</b> Una tarde de películas, mimos infinitos y cero interrupciones.</div>
         </div>
     </div>
 
-    <!-- MODAL MENÚ VIP CULINARIO -->
     <div id="modalMenu" class="modal">
         <div class="modal-content menu-bg">
             <span class="cerrar" id="btnCerrarMenu">&times;</span>
-            <h3>Menú Degustación del Chef 👨‍🍳</h3>
-            <p style="font-size: 0.9em; margin-bottom: 15px;">Selecciona lo que se te antoje para la noche de regreso:</p>
-            
-            <button class="btn-platillo" onclick="pedidoConfirmado('Asado Argentino')">🔥 Asado estilo argentino, cortes al punto perfecto.</button>
-            <button class="btn-platillo" onclick="pedidoConfirmado('Lasagna con a salsa que más te guste')">🍲 Una buena lasagna a fuego lento, de esas que curan el alma.</button>
-            <button class="btn-platillo" onclick="pedidoConfirmado('Patacones con con mucho amor')">🌴 Sorpresa, porque te antojé y te los debo.</button>
-            
-            <p id="mensajePedido" style="display:none; color:#0b4b36; font-weight:bold; margin-top:15px;">¡Oído Chef! Tu pedido ha sido registrado con mucho amor. 🍷</p>
+            <h3>Menú Degustación 👨‍🍳</h3>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">Selecciona lo que se te antoje para tu regreso:</p>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Asado Argentino')">🔥 Asado estilo argentino, al punto perfecto.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Lasagna')">🍲 Una buena lasagna a fuego lento.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Patacones')">🌴 Sorpresa, porque te antojé y te los debo.</button>
+            <p id="mensajePedido" style="display:none; color:#0b4b36; font-weight:bold; margin-top:15px;">¡Oído Chef! Tu pedido ha sido registrado. 🍷</p>
         </div>
     </div>
 
-    <!-- MODAL CÁPSULA DE TIEMPO -->
+    <!-- CÁPSULA -->
     <div id="modalCapsula" class="modal">
         <div class="modal-content secreto-bg">
             <span class="cerrar" id="btnCerrarCapsula">&times;</span>
             <h3 id="tituloCapsula">⏳ Accesando...</h3>
-            <p id="textoCapsula" class="texto-carrusel">Calculando fecha estelar...</p>
+            <p id="textoCapsula" class="texto-carrusel" style="color:#2c3e50;">Calculando fecha...</p>
         </div>
     </div>
 
-    <!-- MODAL EASTER EGG (ATRAPA CORAZONES) -->
-    <div id="modalSecreto" class="modal">
-        <div class="modal-content secreto-bg">
-            <span class="cerrar" id="btnCerrarSecreto">&times;</span>
-            <h3>¡Atrapaste los corazones! 🤫❤️</h3>
-            <p class="texto-carrusel">Me encanta que seas tan curiosa. Solo quería aprovechar este rincón secreto para recordarte una vez más que me traes completamente loco. Cuidate mucho, te quiero un mundo.</p>
-        </div>
-    </div>
-
-    <!-- NUEVO: MODAL BUZÓN DE POSTALES -->
-    <div id="modalBuzon" class="modal">
-        <div class="modal-content cupones-bg">
-            <span class="cerrar" id="btnCerrarBuzon">&times;</span>
-            <h3>Buzón de Postales 📬</h3>
-            <p style="font-size: 0.9em; margin-bottom: 15px;">Escríbeme lo que estás sintiendo o pensando viendo el mar. Te leo desde Costa Rica:</p>
-            <textarea id="textoPostal" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 2px solid #e5b13a; box-sizing: border-box; font-family: inherit; margin-bottom: 15px;" placeholder="Mi amor, hoy en la playa..."></textarea>
-            <button id="btnEnviarPostal" class="btn-sorpresa" style="width: 100%;">Sellar y Enviar ✈️</button>
-        </div>
-    </div>
-
-<!-- MODAL BOLETO DE REGRESO VIP -->
+    <!-- BOLETO VIP -->
     <div id="modalContrato" class="modal">
-        <div class="modal-content" style="background-color: #fdfefe; border: 2px dashed #333; font-family: 'Courier New', Courier, monospace; text-align: left; background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
+        <div class="modal-content" style="background-color: #fdfefe; border: 2px dashed #333; font-family: 'Courier New', monospace; text-align: left; background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); color: #333;">
             <span class="cerrar" id="btnCerrarContrato">&times;</span>
             <h3 style="text-align: center; border-bottom: 2px dashed #333; padding-bottom: 10px; margin-top: 0; color: #ce1126;">🎟️ BOARDING PASS VIP 🎟️</h3>
-            <p><b>ORIGEN:</b> Paraíso Jamaiquino 🇯🇲</p>
-            <p><b>DESTINO:</b> Directo a mis brazos 🇨🇷</p>
-            <p><b>PASAJERA VIP:</b> Romi (La mujer que me trae loco)</p>
-            <p><b>ASIENTO:</b> Exclusivo. Donde tú quieras, preferiblemente encima de mí.</p>
-            <p><b>TÉRMINOS Y CONDICIONES:</b> Se recomienda abrocharse el cinturón porque la bienvenida será intensa. Cláusula innegociable de besos infinitos al aterrizar.</p>
-            <p style="text-align: center; margin-top: 25px;">
-                <button id="btnFirmar" class="btn-sorpresa" style="background-color: #27ae60; width: 100%;">Confirmar Check-in 🔥</button>
-            </p>
+            <p style="color:#333;"><b>ORIGEN:</b> Paraíso Jamaiquino 🇯🇲</p>
+            <p style="color:#333;"><b>DESTINO:</b> Directo a mis brazos 🇨🇷</p>
+            <p style="color:#333;"><b>PASAJERA VIP:</b> Romi (La que me trae loco)</p>
+            <p style="color:#333;"><b>ASIENTO:</b> Exclusivo. Donde tú quieras, preferiblemente encima de mí.</p>
+            <p style="color:#333; font-size:0.9em;"><b>CONDICIONES:</b> Abrocharse el cinturón. Cláusula innegociable de besos al aterrizar.</p>
+            <button id="btnFirmar" class="btn-sorpresa" style="background-color: #27ae60; width: 100%; margin-top: 15px;">Confirmar Check-in 🔥</button>
         </div>
     </div>
 
-    <!-- MODAL RADAR DE CONEXIÓN -->
+    <!-- RADAR -->
     <div id="modalRadar" class="modal">
         <div class="modal-content" style="background-color: #081119; color: #4ade80; border: 2px solid #4ade80;">
             <span class="cerrar" id="btnCerrarRadar" style="color: #4ade80;">&times;</span>
@@ -145,11 +126,107 @@
                 <div class="punto-jm"></div>
                 <div class="linea-conexion"></div>
             </div>
-            <p style="margin-top: 25px; font-weight: bold; font-family: sans-serif; font-size: 0.9em; line-height: 1.4;">No importa que estemos a más de 1,200 km de distancia, la conexión Costa Rica - Jamaica sigue en verde. 🟢</p>
+            <p style="margin-top: 25px; font-weight: bold; font-family: sans-serif; font-size: 0.9em; line-height: 1.4; color: #4ade80;">A más de 1,200 km de distancia, la conexión CR - JM sigue en verde. 🟢</p>
         </div>
     </div>
 
-    <!-- Corazones interactivos -->
+    <!-- HUELLA BIOMÉTRICA -->
+    <div id="modalHuella" class="modal">
+        <div class="modal-content secreto-bg">
+            <span class="cerrar" id="btnCerrarHuella">&times;</span>
+            <h3 id="tituloHuella">Escáner Biométrico 👆</h3>
+            <p id="instruccionHuella" style="font-size: 0.9em; margin-bottom: 15px; color: #2c3e50;">Mantén presionado por 3 segundos para verificar tu identidad.</p>
+            <button id="btnEscanear" class="btn-sorpresa" style="width: 100px; height: 100px; border-radius: 50%; font-size: 40px; touch-action: none; background-color: #d35400;">👆</button>
+            <div id="barraEscaneo" style="width: 0%; height: 5px; background-color: #4ade80; margin-top: 15px;"></div>
+            <p id="resultadoHuella" class="texto-carrusel" style="display: none; margin-top: 15px; font-size: 0.95em; color: #2c3e50;"></p>
+        </div>
+    </div>
+
+    <!-- LECTOR DE PENSAMIENTOS -->
+    <div id="modalPensamientos" class="modal">
+        <div class="modal-content menu-bg">
+            <span class="cerrar" id="btnCerrarPensamientos">&times;</span>
+            <h3 style="color: #2980b9;">Conectando con CR... 📡</h3>
+            <p id="textoPensamiento" class="texto-carrusel" style="font-weight: bold; color: #ce1126; margin-top: 20px; min-height: 80px;">Pensando...</p>
+            <button id="btnOtroPensamiento" class="btn-sorpresa" style="margin-top: 15px; background-color: #2980b9; width: 100%;">Leer otro pensamiento 🔄</button>
+        </div>
+    </div>
+
+    <!-- ALTA TENSIÓN -->
+    <div id="modalTension" class="modal">
+        <div class="modal-content" style="background-color: #111; color: white; border: 2px solid #ff4d4d;">
+            <span class="cerrar" id="btnCerrarTension" style="color: #ff4d4d;">&times;</span>
+            <h3 style="color: #ff4d4d; text-shadow: 0 0 10px #ff4d4d;">⚠️ ADVERTENCIA ⚠️</h3>
+            <div id="faseAdvertencia">
+                <p style="margin: 20px 0; color: white;">¿Confirmas que estás completamente sola y nadie está viendo tu pantalla?</p>
+                <button id="btnSola" class="btn-sorpresa" style="background-color: #ff4d4d; color: black; font-weight: bold;">Sí, estoy sola 👀</button>
+            </div>
+            <div id="fasePicante" style="display:none; margin-top: 15px;">
+                <p style="font-style: italic; font-size: 1.1em; line-height: 1.5; color: #ffcccc;">"Perfecto... Solo quería aprovechar que estamos a solas para decirte que no dejo de imaginar cómo te vas a ver con ese bronceado cuando vuelvas. Prepárate, porque la bienvenida que te tengo guardada no es apta para todo público." 🔥</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENÚ DE BESOS -->
+    <div id="modalBesos" class="modal">
+        <div class="modal-content" style="background-color: #ffe6f2; border: 2px solid #e84393;">
+            <span class="cerrar" id="btnCerrarBesos" style="color: #e84393;">&times;</span>
+            <h3 style="color: #e84393;">Menú de Besos 💋</h3>
+            <p style="color: #333; margin-bottom: 15px;">Selecciona dónde quieres canjear el tuyo hoy:</p>
+            <div id="opcionesBesos">
+                <button class="btn-beso" onclick="mostrarBeso('frente')">En la frente</button>
+                <button class="btn-beso" onclick="mostrarBeso('cuello')">En el cuello</button>
+                <button class="btn-beso" onclick="mostrarBeso('sorpresa')">Sorpréndeme</button>
+            </div>
+            <p id="textoBeso" class="texto-carrusel" style="display:none; color: #333; margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <!-- BÓVEDA CONFIDENCIAL -->
+    <div id="modalBoveda" class="modal">
+        <div class="modal-content" style="background-color: #2c3e50; color: white; border: 2px solid #f1c40f;">
+            <span class="cerrar" id="btnCerrarBoveda" style="color: #f1c40f;">&times;</span>
+            <h3 style="color: #f1c40f;">Bóveda Confidencial 🔐</h3>
+            <p style="margin-bottom: 15px; font-size: 0.9em; color: white;">Ingrese el PIN de 4 dígitos para revelar el documento secreto:</p>
+            <input type="password" id="pinInput" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 10px; width: 150px; padding: 10px; border-radius: 8px; border: none; outline: none; margin-bottom: 15px; color: black;">
+            <br>
+            <button id="btnVerificarPin" class="btn-sorpresa" style="background-color: #f1c40f; color: black; width: 150px;">Desbloquear</button>
+            <p id="errorPin" style="color: #e74c3c; display: none; margin-top: 15px; font-weight: bold;">Acceso denegado.</p>
+            <div id="secretoBoveda" style="display: none; margin-top: 20px;">
+                <p style="font-style: italic; color: #ecf0f1; line-height: 1.5;">"Eres lo mejor que me ha pasado en mucho tiempo. Disfruta tu viaje, pero recuerda que aquí tienes a alguien que cuenta las horas para volver a verte sonreír. Te quiero un mundo." 💛</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BUZÓN -->
+    <div id="modalBuzon" class="modal">
+        <div class="modal-content cupones-bg">
+            <span class="cerrar" id="btnCerrarBuzon">&times;</span>
+            <h3>Buzón de Postales 📬</h3>
+            <p style="font-size: 0.9em; margin-bottom: 15px; color: #2c3e50;">Escríbeme lo que estás sintiendo o pensando viendo el mar:</p>
+            <textarea id="textoPostal" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 2px solid #e5b13a; box-sizing: border-box; font-family: inherit; margin-bottom: 15px; color: black;" placeholder="Mi amor, hoy en la playa..."></textarea>
+            <button id="btnEnviarPostal" class="btn-sorpresa" style="background-color: #0b4b36;">Sellar y Enviar ✈️</button>
+        </div>
+    </div>
+
+    <!-- MENSAJE EN LA BOTELLA (MODAL Y OBJETO FLOTANTE) -->
+    <div id="modalBotella" class="modal">
+        <div class="modal-content" style="background-color: #fdfefe; border: 2px solid #85c1e9; background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');">
+            <span class="cerrar" id="btnCerrarBotella">&times;</span>
+            <h3 style="color: #2e86c1;">Mensaje en la Botella 🍾🌊</h3>
+            <p class="texto-carrusel" style="font-family: 'Courier New', Courier, monospace; font-size: 0.95em; color: #333;">"Llevo días lanzando estas botellas al mar esperando que la marea te las lleve a Jamaica. Qué suerte que atrapaste esta... Solo quería recordarte que eres mi vista favorita, incluso por encima de las playas del Caribe. Vuelve pronto, te extraño."</p>
+        </div>
+    </div>
+    <div id="botellaFlotante" class="botella-flotante">🍾</div>
+
+    <!-- CORAZONES Y EASTER EGG -->
+    <div id="modalSecreto" class="modal">
+        <div class="modal-content secreto-bg">
+            <span class="cerrar" id="btnCerrarSecreto">&times;</span>
+            <h3 style="color:#ce1126;">¡Atrapaste los corazones! 🤫❤️</h3>
+            <p class="texto-carrusel" style="color: #2c3e50;">Me encanta que seas tan curiosa. Solo quería aprovechar este rincón secreto para recordarte una vez más que me traes completamente loco.</p>
+        </div>
+    </div>
     <div class="hearts-background">
         <div class="corazon-flotante">❤️</div><div class="corazon-flotante">💚</div>
         <div class="corazon-flotante">💛</div><div class="corazon-flotante">❤️</div>

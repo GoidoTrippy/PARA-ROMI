@@ -1,42 +1,81 @@
-html { height: -webkit-fill-available; }
-body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; min-height: -webkit-fill-available; background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed; background-size: cover; font-family: 'Georgia', serif; overflow: hidden; touch-action: none; }
+html { 
+    height: -webkit-fill-available; 
+}
+body { 
+    margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
+    min-height: 100vh; min-height: -webkit-fill-available; 
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed; 
+    background-size: cover; font-family: 'Georgia', serif; overflow: hidden; touch-action: none; transition: background 1s ease;
+}
 
+/* --- MODO MADRUGADA (IMAGEN CORREGIDA) --- */
+body.modo-noche {
+    background-image: url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') !important;
+}
+.modo-noche .scratch-container { background-color: #1a1a2e; border-color: #4a4e69; box-shadow: 0 20px 40px rgba(0,0,0,0.9); }
+/* El color claro solo aplica a los textos principales, no a los modales */
+.modo-noche .hidden-content h2 { color: #f1c40f !important; }
+.modo-noche .hidden-content p { color: #e0e1dd !important; }
+
+/* Botones flotantes (SOS, Luna, Buzón) */
+.btn-sos { position: fixed; bottom: 20px; right: 20px; background-color: #ce1126; color: white; padding: 12px 18px; border-radius: 30px; text-decoration: none; font-weight: bold; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-family: sans-serif;}
+.btn-buzon { position: fixed; bottom: 20px; left: 20px; background-color: #0b4b36; color: white; padding: 12px 18px; border-radius: 30px; border: none; font-weight: bold; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-family: sans-serif; cursor: pointer;}
+.btn-luna { position: fixed; top: 20px; right: 20px; background-color: rgba(0,0,0,0.6); color: white; border: none; font-size: 22px; width: 45px; height: 45px; border-radius: 50%; z-index: 50; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center;}
+
+/* Pantalla de Inicio */
 .pantalla-inicio { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 50, 20, 0.85); z-index: 100; display: flex; justify-content: center; align-items: center; color: white; text-align: center; }
 #btnEmpezar { margin-top: 20px; padding: 15px 30px; font-size: 1.1em; border: none; border-radius: 25px; background-color: #fcd116; color: #000; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-.scratch-container { position: relative; width: 90%; max-width: 360px; height: 600px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); background-color: #fffaf0; border: 4px solid #e5b13a; z-index: 10; }
-.hidden-content { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; box-sizing: border-box; }
-.hidden-content h2 { color: #0b4b36; font-size: 1.2em; margin-bottom: 10px; }
-.hidden-content p { font-size: 0.95em; line-height: 1.4; margin-bottom: 10px; color: #2c3e50; }
-.firma { font-weight: bold; font-style: italic; color: #000; margin-bottom: 15px;}
+/* --- CONTENEDOR PRINCIPAL: OPTIMIZADO PARA IPHONE (SCROLL) --- */
+.scratch-container { 
+    position: relative; width: 90%; max-width: 360px; 
+    height: 75vh; /* Altura dinámica adaptable a cualquier pantalla */
+    min-height: 480px; max-height: 650px; 
+    border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
+    background-color: #fffaf0; border: 4px solid #e5b13a; z-index: 10; transition: background-color 1s ease; 
+}
 
-.btn-sorpresa { padding: 12px 20px; background-color: #ce1126; color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: bold; cursor: pointer; z-index: 5; margin-top: 5px; width: 90%;}
-.btn-capsula { background-color: #0b4b36; margin-bottom: 10px; }
-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; touch-action: none; }
+.hidden-content { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    display: flex; flex-direction: column; align-items: center; text-align: center; 
+    padding: 20px 15px 30px 15px; box-sizing: border-box; 
+    overflow-y: auto; justify-content: flex-start;
+    -webkit-overflow-scrolling: touch; /* SÚPER IMPORTANTE: Permite deslizar suavemente en iPhone */
+}
 
+.hidden-content::-webkit-scrollbar { width: 5px; } 
+.hidden-content::-webkit-scrollbar-thumb { background: #e5b13a; border-radius: 5px; }
+.hidden-content h2 { color: #0b4b36; font-size: 1.2em; margin-bottom: 5px; margin-top: 10px; }
+.hidden-content p { font-size: 0.9em; line-height: 1.4; margin-bottom: 8px; color: #2c3e50; transition: color 1s ease; }
+.firma { font-weight: bold; font-style: italic; color: #000; margin-bottom: 10px;}
+canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; touch-action: none; border-radius: 10px; }
+
+/* Cuadrícula para acomodar todos los botones en iPhone */
+.botones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 5px; padding-bottom: 30px;}
+.btn-sorpresa { padding: 12px 4px; background-color: #0b4b36; color: white; border: none; border-radius: 8px; font-size: 0.85em; font-weight: bold; cursor: pointer; z-index: 5; width: 100%; line-height: 1.2; word-wrap: break-word; }
+
+/* Modales y Textos */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; }
 .modal-content { background-color: #fffaf0; padding: 30px; border-radius: 15px; width: 85%; max-width: 320px; text-align: center; position: relative; border: 3px solid #0b4b36; }
-.cerrar { position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; color: #333; cursor: pointer; }
-
-.texto-carrusel { font-size: 1.1em; min-height: 100px; display: flex; align-items: center; justify-content: center; font-style: italic; color: #2c3e50; }
+.cerrar { position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; color: inherit; cursor: pointer; }
+.texto-carrusel { font-size: 1.05em; min-height: 100px; display: flex; align-items: center; justify-content: center; font-style: italic; color: inherit; }
 .controles-carrusel { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
-.controles-carrusel button { background-color: transparent; border: 2px solid #e5b13a; padding: 8px 12px; border-radius: 5px; font-weight: bold; color: #0b4b36; cursor: pointer;}
-#btnIrACupones { display: none; margin-top: 15px; padding: 12px; background-color: #0b4b36; color: white; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-/* --- NUEVOS ESTILOS: SOS, CUPÓN VIP Y MENÚ --- */
-.btn-sos { position: fixed; bottom: 20px; right: 20px; background-color: #ce1126; color: white; padding: 12px 18px; border-radius: 30px; text-decoration: none; font-weight: bold; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-family: sans-serif;}
+/* Estilos Cupones y Menú */
 .cupones-bg { background-color: #fff8e7; border-color: #e5b13a; }
 .cupon { background-color: #fff; border: 2px dashed #ce1126; padding: 12px; margin: 12px 0; border-radius: 8px; font-weight: normal; color: #2c3e50; text-align: left; font-size: 0.9em; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
 .cupon-interactivo { background-color: #ffe8e8; border-color: #0b4b36; cursor: pointer; transition: transform 0.2s; }
 .cupon-interactivo:active { transform: scale(0.95); }
 .menu-bg { border-color: #e5b13a; background-color: #fffaf0; }
-.btn-platillo { width: 100%; text-align: left; background-color: #fff; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 8px; font-family: inherit; color: #333; cursor: pointer; transition: 0.3s; }
+.btn-platillo { width: 100%; text-align: left; background-color: #fff; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 8px; font-family: inherit; color: #333; cursor: pointer; transition: 0.3s; font-weight: bold;}
 .btn-platillo:hover { background-color: #e5b13a; color: #fff; border-color: #e5b13a; }
-.secreto-bg { border-color: #ce1126; }
-/* NUEVO: Estilo para el botón del buzón flotante */
-.btn-buzon { position: fixed; bottom: 20px; left: 20px; background-color: #0b4b36; color: white; padding: 12px 18px; border-radius: 30px; text-decoration: none; font-weight: bold; z-index: 50; box-shadow: 0 4px 10px rgba(0,0,0,0.5); font-family: sans-serif; border: none; cursor: pointer; }
 
+/* Menú de Besos (Corregido choque de clases) */
+.btn-beso { width: 100%; text-align: left; background-color: #fff; border: 2px solid #e84393; padding: 15px; margin-bottom: 10px; border-radius: 8px; font-family: inherit; color: #e84393; cursor: pointer; transition: 0.3s; font-weight: bold;}
+.btn-beso:hover { background-color: #e84393; color: #fff; }
+.secreto-bg { border-color: #ce1126; }
+
+/* Animación Corazones */
 .hearts-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 15; pointer-events: none; }
 .corazon-flotante { position: absolute; bottom: -20px; font-size: 35px; animation: floatUp 6s linear infinite; opacity: 0.7; pointer-events: auto; cursor: pointer; transition: all 0.2s ease; }
 .hearts-background div:nth-child(1) { left: 10%; animation-duration: 5s; }
@@ -46,30 +85,24 @@ canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index
 .hearts-background div:nth-child(5) { left: 85%; animation-duration: 5.5s; animation-delay: 4s; }
 .hearts-background div:nth-child(6) { left: 15%; animation-duration: 6.5s; animation-delay: 1.5s; }
 @keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.7; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
-/* --- ESTILOS DEL RADAR DE CONEXIÓN CORREGIDO --- */
-.radar-container {
-    position: relative; width: 280px; height: 160px; background: rgba(0, 20, 10, 0.8);
-    border-radius: 10px; overflow: hidden; margin: 15px auto 0; border: 1px solid #196f3d;
-}
-.radar-sweep {
-    position: absolute; top: 50%; left: 50%; width: 200%; height: 200%;
-    background: conic-gradient(rgba(74, 222, 128, 0.1) 0%, rgba(74, 222, 128, 0.6) 10%, transparent 40%);
-    transform-origin: 0% 0%; animation: spin 4s linear infinite; pointer-events: none; z-index: 3;
-}
+
+/* Radar */
+.radar-container { position: relative; width: 260px; height: 140px; background: rgba(0, 20, 10, 0.8); border-radius: 10px; overflow: hidden; margin: 15px auto 0; border: 1px solid #196f3d; }
+.radar-sweep { position: absolute; top: 50%; left: 50%; width: 200%; height: 200%; background: conic-gradient(rgba(74, 222, 128, 0.1) 0%, rgba(74, 222, 128, 0.6) 10%, transparent 40%); transform-origin: 0% 0%; animation: spin 4s linear infinite; pointer-events: none; z-index: 3; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
-.punto-cr {
-    position: absolute; bottom: 25px; left: 25px; width: 12px; height: 12px;
-    background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80; z-index: 2;
-}
-.punto-jm {
-    position: absolute; top: 25px; right: 25px; width: 12px; height: 12px;
-    background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80; z-index: 2;
-}
+.punto-cr { position: absolute; bottom: 20px; left: 20px; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80; z-index: 2; }
+.punto-jm { position: absolute; top: 20px; right: 20px; width: 10px; height: 10px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 12px #4ade80; z-index: 2; }
 .punto-cr::after { content: 'CR'; position: absolute; top: 15px; left: -3px; font-size: 0.7em; font-weight: bold; font-family: sans-serif;}
 .punto-jm::after { content: 'JM'; position: absolute; bottom: 15px; left: -3px; font-size: 0.7em; font-weight: bold; font-family: sans-serif;}
-.linea-conexion {
-    position: absolute; bottom: 30px; left: 31px; width: 239px; height: 2px;
-    background-color: #4ade80; transform-origin: left center; transform: rotate(-24.2deg);
-    box-shadow: 0 0 10px #4ade80; animation: pulseLine 2s infinite; z-index: 1;
-}
+.linea-conexion { position: absolute; bottom: 25px; left: 25px; width: 230px; height: 2px; background-color: #4ade80; transform-origin: left center; transform: rotate(-24.5deg); box-shadow: 0 0 10px #4ade80; animation: pulseLine 2s infinite; z-index: 1; }
 @keyframes pulseLine { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+
+/* Botella Flotante (CORRECCIÓN: Fija en la pantalla, no choca) */
+.botella-flotante { 
+    position: fixed; top: 40%; left: -20%; font-size: 45px; cursor: pointer; z-index: 15; 
+    animation: flotarBotella 20s linear infinite, bobbing 2s ease-in-out infinite alternate; 
+    transition: transform 0.2s; 
+}
+.botella-flotante:hover { transform: scale(1.2) rotate(15deg); }
+@keyframes flotarBotella { 0% { left: -20%; } 100% { left: 120%; } }
+@keyframes bobbing { 0% { transform: translateY(0) rotate(-10deg); } 100% { transform: translateY(-15px) rotate(10deg); } }
