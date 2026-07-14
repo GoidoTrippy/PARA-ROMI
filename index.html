@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Romi 🇯🇲</title>
+    <title>Para Romi</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- El archivo de audio -->
-    <audio id="musicaFondo" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="musicaFondo" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+
+    <!-- Botón S.O.S (Siempre visible después del inicio) -->
+    <a href="https://wa.me/50688317018?text=¡S.O.S!%20Emergencia%20en%20Jamaica.%20Necesito%20que%20me%20digas%20algo%20lindo,%20cambio%20🌴❤️" target="_blank" id="btnSOS" class="btn-sos" style="display: none;">🛟 S.O.S</a>
+
+    <!-- NUEVO: Botón del Buzón -->
+    <button id="btnAbrirBuzon" class="btn-buzon" style="display: none;">📬 Enviar Postal</button>
 
     <!-- FASE 1: Pantalla de Inicio -->
     <div id="pantallaInicio" class="pantalla-inicio">
@@ -22,23 +25,20 @@
         </div>
     </div>
 
-    <!-- FASE 2 y 3: Contenedor Principal -->
+    <!-- FASE 2: Contenedor Principal -->
     <div class="scratch-container" id="contenedorPrincipal" style="display: none;">
-        
-        <!-- Capa Inferior: El Poema y el Botón de Extras -->
         <div class="hidden-content" id="hiddenContent">
             <h2>Romi en Jamaica: <br> Tu aventura caribeña 🌴🇯🇲☀️</h2>
-            
-            <p>Para la viajera más hermosa que mis ojos han visto, que el ritmo del reggae te envuelva en la playa y el calor del Caribe acaricie tu piel. Tienes unos ojos tan impresionantes que es un verdadero peligro (y un deleite) perderme en ellos.</p>
-            
-            <p>Allá brillará el sol, pero te aseguro que él y la luna mueren de envidia, porque no hay astro que compita con la luz de tu sonrisa.</p>
-            
+            <p>Para la viajera más hermosa que mis ojos han visto, que el ritmo del reggae te envuelva en la playa y el calor del Caribe acaricie tu piel. Tienes unos ojos tan impresionantes que es un verdadero peligro perderme en ellos.</p>
+            <p>Allá brillará el sol, pero te aseguro que él y la luna mueren de envidia por la luz de tu sonrisa.</p>
             <p class="firma">Con todo mi amor,<br>Diego</p>
 
-            <button id="btnMasSorpresas" class="btn-sorpresa">Abrir tu equipaje extra 🧳</button>
+            <!-- TODOS LOS BOTONES VAN AQUÍ ADENTRO -->
+            <button id="btnCapsula" class="btn-sorpresa btn-capsula">⏳ Abrir Cápsula del Tiempo</button>
+            <button id="btnMasSorpresas" class="btn-sorpresa">Abrir mi equipaje extra 🧳</button>
+            <button id="btnContrato" class="btn-sorpresa" style="background-color: #7d3c98;">🎫 Boleto de Regreso VIP</button>
+            <button id="btnRadar" class="btn-sorpresa" style="background-color: #1a5276;">📡 Radar de Conexión</button>
         </div>
-
-        <!-- Capa Superior: El lienzo interactivo -->
         <canvas id="scratchCanvas"></canvas>
     </div>
 
@@ -46,10 +46,9 @@
     <div id="modalSorpresas" class="modal">
         <div class="modal-content">
             <span class="cerrar" id="btnCerrar">&times;</span>
-            <!-- AQUÍ CAMBIAMOS EL TÍTULO -->
-            <h3 id="tituloCarrusel">Mensajes que te describen a la perfección</h3>
+            <h3 id="tituloCarrusel">Secretos para leer a solas... 😏</h3>
             <p id="textoCarrusel" class="texto-carrusel">Mensaje 1</p>
-            
+            <button id="btnIrACupones">Ver mis regalos de bienvenida 🎁</button>
             <div class="controles-carrusel">
                 <button id="btnAnterior">◀ Anterior</button>
                 <span id="contador">1 / 5</span>
@@ -58,9 +57,103 @@
         </div>
     </div>
 
-    <!-- Corazones de fondo -->
+    <!-- MODAL CUPONES (Ahora con el Menú VIP) -->
+    <div id="modalCupones" class="modal">
+        <div class="modal-content cupones-bg">
+            <span class="cerrar" id="btnCerrarCupones">&times;</span>
+            <h3>Tus Cupones de Regreso 🎟️</h3>
+            <div class="cupon">💆‍♀️ <b>Vale por:</b> Un masaje relajante post-vuelo para quitarte todo el cansancio.</div>
+            
+            <!-- Cupón Interactivo VIP -->
+            <div class="cupon cupon-interactivo" id="btnAbrirMenu">
+                🥩 <b>Vale por: Una Cena VIP</b><br>
+                <i>(Toca aquí para elegir tu platillo de bienvenida)</i> 👉
+            </div>
+            
+            <div class="cupon">🍿 <b>Vale por:</b> Una tarde de películas, chineos infinitos y cero interrupciones.</div>
+        </div>
+    </div>
+
+    <!-- MODAL MENÚ VIP CULINARIO -->
+    <div id="modalMenu" class="modal">
+        <div class="modal-content menu-bg">
+            <span class="cerrar" id="btnCerrarMenu">&times;</span>
+            <h3>Menú Degustación del Chef 👨‍🍳</h3>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">Selecciona lo que se te antoje para la noche de regreso:</p>
+            
+            <button class="btn-platillo" onclick="pedidoConfirmado('Asado Argentino')">🔥 Asado estilo argentino, cortes al punto perfecto.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Lasagna con a salsa que más te guste')">🍲 Una buena lasagna a fuego lento, de esas que curan el alma.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Patacones con con mucho amor')">🌴 Sorpresa, porque te antojé y te los debo.</button>
+            
+            <p id="mensajePedido" style="display:none; color:#0b4b36; font-weight:bold; margin-top:15px;">¡Oído Chef! Tu pedido ha sido registrado con mucho amor. 🍷</p>
+        </div>
+    </div>
+
+    <!-- MODAL CÁPSULA DE TIEMPO -->
+    <div id="modalCapsula" class="modal">
+        <div class="modal-content secreto-bg">
+            <span class="cerrar" id="btnCerrarCapsula">&times;</span>
+            <h3 id="tituloCapsula">⏳ Accesando...</h3>
+            <p id="textoCapsula" class="texto-carrusel">Calculando fecha estelar...</p>
+        </div>
+    </div>
+
+    <!-- MODAL EASTER EGG (ATRAPA CORAZONES) -->
+    <div id="modalSecreto" class="modal">
+        <div class="modal-content secreto-bg">
+            <span class="cerrar" id="btnCerrarSecreto">&times;</span>
+            <h3>¡Atrapaste los corazones! 🤫❤️</h3>
+            <p class="texto-carrusel">Me encanta que seas tan curiosa. Solo quería aprovechar este rincón secreto para recordarte una vez más que me traes completamente loco. Cuidate mucho, te quiero un mundo.</p>
+        </div>
+    </div>
+
+    <!-- NUEVO: MODAL BUZÓN DE POSTALES -->
+    <div id="modalBuzon" class="modal">
+        <div class="modal-content cupones-bg">
+            <span class="cerrar" id="btnCerrarBuzon">&times;</span>
+            <h3>Buzón de Postales 📬</h3>
+            <p style="font-size: 0.9em; margin-bottom: 15px;">Escríbeme lo que estás sintiendo o pensando viendo el mar. Te leo desde Costa Rica:</p>
+            <textarea id="textoPostal" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 2px solid #e5b13a; box-sizing: border-box; font-family: inherit; margin-bottom: 15px;" placeholder="Mi amor, hoy en la playa..."></textarea>
+            <button id="btnEnviarPostal" class="btn-sorpresa" style="width: 100%;">Sellar y Enviar ✈️</button>
+        </div>
+    </div>
+
+<!-- MODAL BOLETO DE REGRESO VIP -->
+    <div id="modalContrato" class="modal">
+        <div class="modal-content" style="background-color: #fdfefe; border: 2px dashed #333; font-family: 'Courier New', Courier, monospace; text-align: left; background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');">
+            <span class="cerrar" id="btnCerrarContrato">&times;</span>
+            <h3 style="text-align: center; border-bottom: 2px dashed #333; padding-bottom: 10px; margin-top: 0; color: #ce1126;">🎟️ BOARDING PASS VIP 🎟️</h3>
+            <p><b>ORIGEN:</b> Paraíso Jamaiquino 🇯🇲</p>
+            <p><b>DESTINO:</b> Directo a mis brazos 🇨🇷</p>
+            <p><b>PASAJERA VIP:</b> Romi (La mujer que me trae loco)</p>
+            <p><b>ASIENTO:</b> Exclusivo. Donde tú quieras, preferiblemente encima de mí.</p>
+            <p><b>TÉRMINOS Y CONDICIONES:</b> Se recomienda abrocharse el cinturón porque la bienvenida será intensa. Cláusula innegociable de besos infinitos al aterrizar.</p>
+            <p style="text-align: center; margin-top: 25px;">
+                <button id="btnFirmar" class="btn-sorpresa" style="background-color: #27ae60; width: 100%;">Confirmar Check-in 🔥</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL RADAR DE CONEXIÓN -->
+    <div id="modalRadar" class="modal">
+        <div class="modal-content" style="background-color: #081119; color: #4ade80; border: 2px solid #4ade80;">
+            <span class="cerrar" id="btnCerrarRadar" style="color: #4ade80;">&times;</span>
+            <h3 style="color: #4ade80; text-shadow: 0 0 10px #4ade80; margin-top: 0;">RADAR ACTIVO 📡</h3>
+            <div class="radar-container">
+                <div class="radar-sweep"></div>
+                <div class="punto-cr"></div>
+                <div class="punto-jm"></div>
+                <div class="linea-conexion"></div>
+            </div>
+            <p style="margin-top: 25px; font-weight: bold; font-family: sans-serif; font-size: 0.9em; line-height: 1.4;">No importa que estemos a más de 1,200 km de distancia, la conexión Costa Rica - Jamaica sigue en verde. 🟢</p>
+        </div>
+    </div>
+
+    <!-- Corazones interactivos -->
     <div class="hearts-background">
-        <div>❤️</div><div>💚</div><div>💛</div><div>❤️</div><div>💚</div><div>💛</div>
+        <div class="corazon-flotante">❤️</div><div class="corazon-flotante">💚</div>
+        <div class="corazon-flotante">💛</div><div class="corazon-flotante">❤️</div>
+        <div class="corazon-flotante">💚</div><div class="corazon-flotante">💛</div>
     </div>
 
     <script src="script.js"></script>
