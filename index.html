@@ -2,32 +2,65 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para la viajera más impresionante y increíble</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Romi 🇯🇲</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <div class="hearts-background">
-        <div>❤️</div><div>💚</div><div>💛</div><div>❤️</div><div>💚</div><div>💛</div>
+
+    <!-- El archivo de audio -->
+    <audio id="musicaFondo" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- FASE 1: Pantalla de Inicio -->
+    <div id="pantallaInicio" class="pantalla-inicio">
+        <div class="inicio-contenido">
+            <h1>Hola, Romi 🌴</h1>
+            <p>Tengo algo preparado para tu viaje...</p>
+            <button id="btnEmpezar">Tocar para descubrir</button>
+        </div>
     </div>
 
-    <div class="scratch-container">
+    <!-- FASE 2 y 3: Contenedor Principal -->
+    <div class="scratch-container" id="contenedorPrincipal" style="display: none;">
         
+        <!-- Capa Inferior: El Poema y el Botón de Extras -->
         <div class="hidden-content" id="hiddenContent">
-            <h2>Romi en Jamaica: <br> Tu aventura caribeña 🌴☀️</h2>
+            <h2>Romi en Jamaica: <br> Tu aventura caribeña 🌴🇯🇲☀️</h2>
             
             <p>Para la viajera más hermosa que mis ojos han visto, que el ritmo del reggae te envuelva en la playa y el calor del Caribe acaricie tu piel. Tienes unos ojos tan impresionantes que es un verdadero peligro (y un deleite) perderme en ellos.</p>
             
             <p>Allá brillará el sol, pero te aseguro que él y la luna mueren de envidia, porque no hay astro que compita con la luz de tu sonrisa.</p>
             
-            <p>Me llena el pecho de un orgullo inmenso verte volar, conquistar el mundo y disfrutar esta aventura. Eres mi presunción favorita.</p>
-            
             <p class="firma">Con todo mi amor,<br>Diego</p>
+
+            <button id="btnMasSorpresas" class="btn-sorpresa">Abrir tu equipaje extra 🧳</button>
         </div>
 
-        
+        <!-- Capa Superior: El lienzo interactivo -->
         <canvas id="scratchCanvas"></canvas>
+    </div>
+
+    <!-- FASE 3: El Carrusel de Mensajes -->
+    <div id="modalSorpresas" class="modal">
+        <div class="modal-content">
+            <span class="cerrar" id="btnCerrar">&times;</span>
+            <!-- AQUÍ CAMBIAMOS EL TÍTULO -->
+            <h3 id="tituloCarrusel">Mensajes que te describen a la perfección</h3>
+            <p id="textoCarrusel" class="texto-carrusel">Mensaje 1</p>
+            
+            <div class="controles-carrusel">
+                <button id="btnAnterior">◀ Anterior</button>
+                <span id="contador">1 / 5</span>
+                <button id="btnSiguiente">Siguiente ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corazones de fondo -->
+    <div class="hearts-background">
+        <div>❤️</div><div>💚</div><div>💛</div><div>❤️</div><div>💚</div><div>💛</div>
     </div>
 
     <script src="script.js"></script>

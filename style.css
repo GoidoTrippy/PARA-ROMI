@@ -1,3 +1,5 @@
+/* --- FIX PARA FONDOS EN MÓVILES (iOS/Android) --- */
+html { height: -webkit-fill-available; }
 
 body {
     margin: 0;
@@ -5,32 +7,60 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    /* Tu fondo de playa */
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
     font-family: 'Georgia', serif; 
-    overflow: hidden;
+    overflow: hidden; /* Evita que la pantalla se mueva */
+    touch-action: none;
 }
 
+/* --- FASE 1: PANTALLA INICIO --- */
+.pantalla-inicio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 50, 20, 0.85); /* Verde oscuro translúcido */
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
 
+#btnEmpezar {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    background-color: #fcd116; /* Amarillo Jamaica */
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* --- FASE 2: TARJETA RASCABLE --- */
 .scratch-container {
     position: relative;
-    width: 340px;
-    height: 580px; 
+    width: 90%;
+    max-width: 360px;
+    height: 600px;
     border-radius: 15px;
-    overflow: hidden;
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     background-color: #fffaf0; 
     border: 4px solid #e5b13a; 
     z-index: 10;
 }
 
-
 .hidden-content {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,71 +68,97 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 30px 25px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
-.hidden-content h2 {
-    color: #0b4b36; 
-    margin-bottom: 15px;
-    font-size: 1.3em;
-    line-height: 1.4;
-}
+.hidden-content h2 { color: #0b4b36; font-size: 1.2em; margin-bottom: 10px; }
+.hidden-content p { font-size: 0.95em; line-height: 1.4; margin-bottom: 10px; color: #2c3e50; }
+.firma { font-weight: bold; font-style: italic; color: #000; margin-bottom: 15px;}
 
-.hidden-content p {
-    font-size: 0.95em;
-    line-height: 1.5;
-    margin-bottom: 12px;
-    color: #2c3e50; 
-}
-
-.firma {
-    margin-top: 10px;
+.btn-sorpresa {
+    padding: 12px 20px;
+    background-color: #ce1126; /* Rojo Jamaica */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
     font-weight: bold;
-    font-style: italic;
-    color: #000;
+    cursor: pointer;
+    z-index: 5; /* Asegura que se pueda hacer clic debajo del canvas */
 }
-
 
 canvas {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     z-index: 20;
     touch-action: none; 
 }
 
-
-.hearts-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; 
-    pointer-events: none; 
+/* --- FASE 3: MODAL/CARRUSEL (Para más de 5 minutos) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
 }
 
-.hearts-background div {
-    position: absolute;
-    bottom: -20px;
-    font-size: 30px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.5; 
+.modal-content {
+    background-color: #fffaf0;
+    padding: 30px;
+    border-radius: 15px;
+    width: 85%;
+    max-width: 320px;
+    text-align: center;
+    position: relative;
+    border: 3px solid #0b4b36;
 }
 
+.cerrar {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
 
+.texto-carrusel {
+    font-size: 1.1em;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+    color: #2c3e50;
+}
+
+.controles-carrusel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.controles-carrusel button {
+    background-color: transparent;
+    border: 2px solid #e5b13a;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #0b4b36;
+}
+
+/* Animación corazones (se mantiene igual) */
+.hearts-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.hearts-background div { position: absolute; bottom: -20px; font-size: 30px; animation: floatUp 6s linear infinite; opacity: 0.5; }
 .hearts-background div:nth-child(1) { left: 10%; animation-duration: 5s; }
 .hearts-background div:nth-child(2) { left: 30%; animation-duration: 7s; animation-delay: 2s; }
 .hearts-background div:nth-child(3) { left: 50%; animation-duration: 6s; animation-delay: 1s; }
 .hearts-background div:nth-child(4) { left: 70%; animation-duration: 8s; animation-delay: 3s; }
 .hearts-background div:nth-child(5) { left: 90%; animation-duration: 5.5s; animation-delay: 4s; }
 .hearts-background div:nth-child(6) { left: 20%; animation-duration: 6.5s; animation-delay: 1.5s; }
-
-@keyframes floatUp {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    20% { opacity: 0.5; }
-    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-}
+@keyframes floatUp { 0% { transform: translateY(0) scale(1); opacity: 0; } 20% { opacity: 0.5; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
