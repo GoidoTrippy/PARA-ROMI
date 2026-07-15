@@ -93,7 +93,7 @@ btnMadrugada.addEventListener('click', () => {
     document.body.classList.toggle('modo-noche');
     if(modoNoche) {
         btnMadrugada.innerText = "☀️";
-        document.getElementById('poemaPrincipal').innerHTML = "<p style='font-style:italic; font-size:1.1em;'>Quería ser lo último que leyeras hoy. Que descanses, mi bella durmiente. Ojalá me sueñes, porque yo seguro te voy a soñar.</p>";
+        document.getElementById('poemaPrincipal').innerHTML = "<p style='font-style:italic; font-size:1.1em;'>Quería ser lo último que leyeras hoy. Que descanses. Ojalá me sueñes, porque yo seguro te voy a soñar.</p>";
         document.getElementById('firmaPrincipal').innerHTML = "Buenas noches,<br>Diego";
     } else {
         btnMadrugada.innerText = "🌙";
@@ -190,7 +190,7 @@ function detenerEscaneo(e) { e.preventDefault(); clearTimeout(timerEscaneo); if(
 btnEscanear.addEventListener('mousedown', iniciarEscaneo); btnEscanear.addEventListener('touchstart', iniciarEscaneo, {passive:false});
 btnEscanear.addEventListener('mouseup', detenerEscaneo); btnEscanear.addEventListener('mouseleave', detenerEscaneo); btnEscanear.addEventListener('touchend', detenerEscaneo);
 
-// 9. LECTOR DE PENSAMIENTOS
+// 9. LECTOR DE PENSAMIENTOS (¡COMA CORREGIDA AQUÍ!)
 const modalPensamientos = document.getElementById('modalPensamientos');
 const listaPensamientos = [
     "Pensando en si ya tomaste café frente al mar...",
@@ -199,8 +199,8 @@ const listaPensamientos = [
     "Pensando en tu asombroso cuerpo y en cómo te debe quedar ese bronceado.",
     "Pensando en tus ojos hipnotizantes... es un verdadero peligro mirarte.",
     "Pensando en cómo le voy a hacer para no comerte a besos apenas te vea.",
-    "Pensando en que el Caribe es lindo, pero no tiene nada que envidiarle a tu belleza."
-    "Pensando en la curva de tu espalda y en abrazarte.", 
+    "Pensando en que el Caribe es lindo, pero no tiene nada que envidiarle a tu belleza.", // ESTA ERA LA COMA FALTANTE
+    "Pensando en la curva de tu espalda y en abrazarte."
 ];
 function generarPensamiento() { document.getElementById('textoPensamiento').innerText = listaPensamientos[Math.floor(Math.random() * listaPensamientos.length)]; }
 document.getElementById('btnPensamientos').addEventListener('click', () => { modalPensamientos.style.display='flex'; generarPensamiento(); });
