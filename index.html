@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <!-- FASE 2: Contenedor Principal (TARJETA) -->
+    <!-- FASE 2: Contenedor Principal (TARJETA DISEÑADA PARA IPHONE) -->
     <div class="scratch-container" id="contenedorPrincipal" style="display: none;">
         <div class="hidden-content" id="hiddenContent">
             <h2>Romi en Jamaica: <br> Tu aventura caribeña 🌴🇯🇲☀️</h2>
@@ -39,7 +39,7 @@
             <!-- CUADRÍCULA DE BOTONES ORDENADA -->
             <div class="botones-grid">
                 <button id="btnCapsula" class="btn-sorpresa btn-capsula">⏳ Cápsula</button>
-                <button id="btnMasSorpresas" class="btn-sorpresa" style="background-color: #ce1126;">🧳 Equipaje extra</button>
+                <button id="btnMasSorpresas" class="btn-sorpresa" style="background-color: #ce1126;">🧳 Equipaje</button>
                 <button id="btnContrato" class="btn-sorpresa" style="background-color: #7d3c98;">🎫 Boleto VIP</button>
                 <button id="btnRadar" class="btn-sorpresa" style="background-color: #1a5276;">📡 Radar</button>
                 <button id="btnHuella" class="btn-sorpresa" style="background-color: #d35400;">👆 Escáner</button>
@@ -85,9 +85,9 @@
             <span class="cerrar" id="btnCerrarMenu">&times;</span>
             <h3>Menú Degustación 👨‍🍳</h3>
             <p style="font-size: 0.9em; margin-bottom: 15px;">Selecciona lo que se te antoje para tu regreso:</p>
-            <button class="btn-platillo" onclick="pedidoConfirmado('Asado Argentino')">🔥 Asado estilo argentino, al punto perfecto.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Asado Argentino')">🔥 Asado estilo argentino.</button>
             <button class="btn-platillo" onclick="pedidoConfirmado('Lasagna')">🍲 Una buena lasagna a fuego lento.</button>
-            <button class="btn-platillo" onclick="pedidoConfirmado('Patacones')">🌴 Sorpresa, porque te antojé y te los debo.</button>
+            <button class="btn-platillo" onclick="pedidoConfirmado('Patacones')">🌴 Sorpresa, porque te los debo.</button>
             <p id="mensajePedido" style="display:none; color:#0b4b36; font-weight:bold; margin-top:15px;">¡Oído Chef! Tu pedido ha sido registrado. 🍷</p>
         </div>
     </div>
@@ -105,12 +105,12 @@
     <div id="modalContrato" class="modal">
         <div class="modal-content" style="background-color: #fdfefe; border: 2px dashed #333; font-family: 'Courier New', monospace; text-align: left; background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); color: #333;">
             <span class="cerrar" id="btnCerrarContrato">&times;</span>
-            <h3 style="text-align: center; border-bottom: 2px dashed #333; padding-bottom: 10px; margin-top: 0; color: #ce1126;">🎟️ BOARDING PASS VIP 🎟️</h3>
+            <h3 style="text-align: center; border-bottom: 2px dashed #333; padding-bottom: 10px; margin-top: 0; color: #ce1126;">🎟️ BOARDING PASS 🎟️</h3>
             <p style="color:#333;"><b>ORIGEN:</b> Paraíso Jamaiquino 🇯🇲</p>
             <p style="color:#333;"><b>DESTINO:</b> Directo a mis brazos 🇨🇷</p>
             <p style="color:#333;"><b>PASAJERA VIP:</b> Romi (La que me trae loco)</p>
-            <p style="color:#333;"><b>ASIENTO:</b> Exclusivo. Donde tú quieras, preferiblemente encima de mí.</p>
-            <p style="color:#333; font-size:0.9em;"><b>CONDICIONES:</b> Abrocharse el cinturón. Cláusula innegociable de besos al aterrizar.</p>
+            <p style="color:#333;"><b>ASIENTO:</b> Exclusivo. Preferiblemente encima de mí.</p>
+            <p style="color:#333; font-size:0.9em;"><b>CONDICIONES:</b> Cláusula innegociable de besos al aterrizar.</p>
             <button id="btnFirmar" class="btn-sorpresa" style="background-color: #27ae60; width: 100%; margin-top: 15px;">Confirmar Check-in 🔥</button>
         </div>
     </div>
@@ -130,13 +130,28 @@
         </div>
     </div>
 
-    <!-- HUELLA BIOMÉTRICA -->
+   <!-- HUELLA BIOMÉTRICA -->
     <div id="modalHuella" class="modal">
         <div class="modal-content secreto-bg">
             <span class="cerrar" id="btnCerrarHuella">&times;</span>
-            <h3 id="tituloHuella">Escáner Biométrico 👆</h3>
+            <h3 id="tituloHuella">Escáner Biométrico 🔍</h3>
             <p id="instruccionHuella" style="font-size: 0.9em; margin-bottom: 15px; color: #2c3e50;">Mantén presionado por 3 segundos para verificar tu identidad.</p>
-            <button id="btnEscanear" class="btn-sorpresa" style="width: 100px; height: 100px; border-radius: 50%; font-size: 40px; touch-action: none; background-color: #d35400;">👆</button>
+            
+            <!-- NUEVO: Botón con ícono vectorial de huella dactilar -->
+            <button id="btnEscanear" class="btn-sorpresa" style="width: 100px; height: 100px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto; touch-action: none; background-color: #d35400;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+                    <path d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+                    <path d="M17.29 21.02c.12-.6.43-2.3.5-3.02"/>
+                    <path d="M2 12a10 10 0 0 1 18-6"/>
+                    <path d="M2 16h.01"/>
+                    <path d="M21.8 16c.2-2 .131-5.354 0-6"/>
+                    <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+                    <path d="M8.65 22c.21-.66.45-1.32.57-2"/>
+                    <path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+                </svg>
+            </button>
+            
             <div id="barraEscaneo" style="width: 0%; height: 5px; background-color: #4ade80; margin-top: 15px;"></div>
             <p id="resultadoHuella" class="texto-carrusel" style="display: none; margin-top: 15px; font-size: 0.95em; color: #2c3e50;"></p>
         </div>
@@ -188,7 +203,7 @@
             <span class="cerrar" id="btnCerrarBoveda" style="color: #f1c40f;">&times;</span>
             <h3 style="color: #f1c40f;">Bóveda Confidencial 🔐</h3>
             <p style="margin-bottom: 15px; font-size: 0.9em; color: white;">Ingrese el PIN de 4 dígitos para revelar el documento secreto:</p>
-            <input type="password" id="pinInput" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 10px; width: 150px; padding: 10px; border-radius: 8px; border: none; outline: none; margin-bottom: 15px; color: black;">
+            <input type="password" id="pinInput" maxlength="4" style="text-align: center; font-size: 24px; letter-spacing: 10px; width: 150px; padding: 10px; border-radius: 8px; border: none; outline: none; margin-bottom: 15px; color: black; background: white;">
             <br>
             <button id="btnVerificarPin" class="btn-sorpresa" style="background-color: #f1c40f; color: black; width: 150px;">Desbloquear</button>
             <p id="errorPin" style="color: #e74c3c; display: none; margin-top: 15px; font-weight: bold;">Acceso denegado.</p>
@@ -204,12 +219,12 @@
             <span class="cerrar" id="btnCerrarBuzon">&times;</span>
             <h3>Buzón de Postales 📬</h3>
             <p style="font-size: 0.9em; margin-bottom: 15px; color: #2c3e50;">Escríbeme lo que estás sintiendo o pensando viendo el mar:</p>
-            <textarea id="textoPostal" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 2px solid #e5b13a; box-sizing: border-box; font-family: inherit; margin-bottom: 15px; color: black;" placeholder="Mi amor, hoy en la playa..."></textarea>
+            <textarea id="textoPostal" rows="4" style="width: 100%; border-radius: 8px; padding: 10px; border: 2px solid #e5b13a; box-sizing: border-box; font-family: inherit; margin-bottom: 15px; color: black; font-size: 16px;" placeholder="Mi amor, hoy en la playa..."></textarea>
             <button id="btnEnviarPostal" class="btn-sorpresa" style="background-color: #0b4b36;">Sellar y Enviar ✈️</button>
         </div>
     </div>
 
-    <!-- MENSAJE EN LA BOTELLA (MODAL Y OBJETO FLOTANTE) -->
+    <!-- MENSAJE EN LA BOTELLA -->
     <div id="modalBotella" class="modal">
         <div class="modal-content" style="background-color: #fdfefe; border: 2px solid #85c1e9; background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');">
             <span class="cerrar" id="btnCerrarBotella">&times;</span>
@@ -217,6 +232,8 @@
             <p class="texto-carrusel" style="font-family: 'Courier New', Courier, monospace; font-size: 0.95em; color: #333;">"Llevo días lanzando estas botellas al mar esperando que la marea te las lleve a Jamaica. Qué suerte que atrapaste esta... Solo quería recordarte que eres mi vista favorita, incluso por encima de las playas del Caribe. Vuelve pronto, te extraño."</p>
         </div>
     </div>
+    
+    <!-- BOTELLA FLOTANTE (Posición segura en móviles) -->
     <div id="botellaFlotante" class="botella-flotante">🍾</div>
 
     <!-- CORAZONES Y EASTER EGG -->
@@ -227,6 +244,7 @@
             <p class="texto-carrusel" style="color: #2c3e50;">Me encanta que seas tan curiosa. Solo quería aprovechar este rincón secreto para recordarte una vez más que me traes completamente loco.</p>
         </div>
     </div>
+    
     <div class="hearts-background">
         <div class="corazon-flotante">❤️</div><div class="corazon-flotante">💚</div>
         <div class="corazon-flotante">💛</div><div class="corazon-flotante">❤️</div>

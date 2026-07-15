@@ -42,13 +42,13 @@ function iniciarLienzo() {
     const canvas = document.getElementById('scratchCanvas');
     const ctx = canvas.getContext('2d');
     
-    // Bloquear botones
+    // Bloquear botones al inicio
     todosLosBotones.forEach(btn => { if(btn) btn.style.pointerEvents = 'none'; });
 
     canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
     ctx.fillStyle = '#e5b13a'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = 'bold 22px Arial'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
-    ctx.fillText('Desliza tu dedo...', canvas.width / 2, canvas.height / 2 - 20);
+    ctx.font = 'bold 20px Arial'; ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center';
+    ctx.fillText('Desliza tu hermoso dedo...', canvas.width / 2, canvas.height / 2 - 20);
 
     let isDrawing = false; let pixelesBorrados = 0;
     function getCoordinates(event) {
@@ -60,9 +60,10 @@ function iniciarLienzo() {
     function startDrawing(event) { isDrawing = true; scratch(event); }
     function stopDrawing() {
         isDrawing = false;
-        if (pixelesBorrados > 40) {
-            // Desbloquear botones
+        if (pixelesBorrados > 35) {
+            // Desbloqueo Inmediato (Mejora especial para iPhone)
             todosLosBotones.forEach(btn => { if(btn) btn.style.pointerEvents = 'auto'; });
+            canvas.style.pointerEvents = 'none'; 
             canvas.style.transition = 'opacity 1.5s ease'; canvas.style.opacity = '0';
             setTimeout(() => { canvas.style.display = 'none'; }, 1500);
         }
@@ -92,7 +93,7 @@ btnMadrugada.addEventListener('click', () => {
     document.body.classList.toggle('modo-noche');
     if(modoNoche) {
         btnMadrugada.innerText = "☀️";
-        document.getElementById('poemaPrincipal').innerHTML = "<p style='font-style:italic; font-size:1.1em;'>Quería ser lo último que leyeras hoy. Que descanses, mi amor. Ojalá me sueñes, porque yo seguro te voy a soñar.</p>";
+        document.getElementById('poemaPrincipal').innerHTML = "<p style='font-style:italic; font-size:1.1em;'>Quería ser lo último que leyeras hoy. Que descanses, mi bella durmiente. Ojalá me sueñes, porque yo seguro te voy a soñar.</p>";
         document.getElementById('firmaPrincipal').innerHTML = "Buenas noches,<br>Diego";
     } else {
         btnMadrugada.innerText = "🌙";
@@ -122,7 +123,6 @@ document.getElementById('btnAbrirMenu').addEventListener('click', () => { modalC
 document.getElementById('btnCerrarMenu').addEventListener('click', () => modalMenu.style.display='none');
 function pedidoConfirmado(platillo) {
     document.getElementById('mensajePedido').style.display = 'block';
-    // Corrección para que solo oculte los platillos del modalMenu
     document.querySelectorAll('#modalMenu .btn-platillo').forEach(btn => btn.style.display = 'none');
 }
 
@@ -177,14 +177,31 @@ const resultadoHuella = document.getElementById('resultadoHuella');
 let timerEscaneo;
 document.getElementById('btnHuella').addEventListener('click', () => modalHuella.style.display='flex');
 document.getElementById('btnCerrarHuella').addEventListener('click', () => { modalHuella.style.display='none'; barraEscaneo.style.width='0%'; resultadoHuella.style.display='none'; btnEscanear.style.display='inline-block'; document.getElementById('instruccionHuella').style.display='block';});
-function iniciarEscaneo(e) { e.preventDefault(); barraEscaneo.style.transition='width 3s linear'; barraEscaneo.style.width='100%'; timerEscaneo = setTimeout(()=>{ btnEscanear.style.display='none'; document.getElementById('instruccionHuella').style.display='none'; resultadoHuella.style.display='block'; resultadoHuella.innerHTML="<b>Biometría completada.</b><br>Identidad confirmada: Romi 🇯🇲.<br><i>Desbloqueado: Eres mi persona favorita.</i>"; }, 3000); }
+function iniciarEscaneo(e) { 
+    e.preventDefault(); barraEscaneo.style.transition='width 3s linear'; barraEscaneo.style.width='100%'; 
+    timerEscaneo = setTimeout(()=>{ 
+        btnEscanear.style.display='none'; 
+        document.getElementById('instruccionHuella').style.display='none'; 
+        resultadoHuella.style.display='block'; 
+        resultadoHuella.innerHTML="<b>Biometría completada.</b><br>Análisis físico: Cuerpo asombroso detectado.<br>Sonrisa: 100% Perfecta.<br>Identidad confirmada: Romi.<br><br><i>Desbloqueado: Eres mi persona favorita.</i>"; 
+    }, 3000); 
+}
 function detenerEscaneo(e) { e.preventDefault(); clearTimeout(timerEscaneo); if(resultadoHuella.style.display!=='block'){ barraEscaneo.style.width='0%'; barraEscaneo.style.transition='width 0.2s'; } }
 btnEscanear.addEventListener('mousedown', iniciarEscaneo); btnEscanear.addEventListener('touchstart', iniciarEscaneo, {passive:false});
 btnEscanear.addEventListener('mouseup', detenerEscaneo); btnEscanear.addEventListener('mouseleave', detenerEscaneo); btnEscanear.addEventListener('touchend', detenerEscaneo);
 
 // 9. LECTOR DE PENSAMIENTOS
 const modalPensamientos = document.getElementById('modalPensamientos');
-const listaPensamientos = ["Pensando en si ya tomaste café frente al mar...", "Pensando en la curva de tu espalda y en abrazarte.", "Pensando en cómo le voy a hacer para no comerte a besos.", "Pensando en que el Caribe no tiene nada que envidiarte."];
+const listaPensamientos = [
+    "Pensando en si ya tomaste café frente al mar...",
+    "Pensando en lo mucho que me encantaría jugar con tu hermoso cabello y más con esas perfectas trenzas.",
+    "Pensando en esa sonrisa perfecta que me vuelve completamente loco.",
+    "Pensando en tu asombroso cuerpo y en cómo te debe quedar ese bronceado.",
+    "Pensando en tus ojos hipnotizantes... es un verdadero peligro mirarte.",
+    "Pensando en cómo le voy a hacer para no comerte a besos apenas te vea.",
+    "Pensando en que el Caribe es lindo, pero no tiene nada que envidiarle a tu belleza."
+    "Pensando en la curva de tu espalda y en abrazarte.", 
+];
 function generarPensamiento() { document.getElementById('textoPensamiento').innerText = listaPensamientos[Math.floor(Math.random() * listaPensamientos.length)]; }
 document.getElementById('btnPensamientos').addEventListener('click', () => { modalPensamientos.style.display='flex'; generarPensamiento(); });
 document.getElementById('btnOtroPensamiento').addEventListener('click', generarPensamiento);

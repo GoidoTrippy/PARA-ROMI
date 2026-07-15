@@ -3,17 +3,18 @@ html {
 }
 body { 
     margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
-    min-height: 100vh; min-height: -webkit-fill-available; 
+    min-height: 100dvh; /* dvh asegura que no choque con la barra de Safari en iPhone */
     background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed; 
     background-size: cover; font-family: 'Georgia', serif; overflow: hidden; touch-action: none; transition: background 1s ease;
 }
 
-/* --- MODO MADRUGADA (IMAGEN CORREGIDA) --- */
+/* --- MODO MADRUGADA (Cielo estrellado garantizado) --- */
 body.modo-noche {
-    background-image: url('https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') !important;
+    background: url('https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed !important; 
+    background-size: cover !important;
 }
 .modo-noche .scratch-container { background-color: #1a1a2e; border-color: #4a4e69; box-shadow: 0 20px 40px rgba(0,0,0,0.9); }
-/* El color claro solo aplica a los textos principales, no a los modales */
+/* El color claro SOLO aplica al texto dentro de la tarjeta y no a los modales */
 .modo-noche .hidden-content h2 { color: #f1c40f !important; }
 .modo-noche .hidden-content p { color: #e0e1dd !important; }
 
@@ -26,11 +27,11 @@ body.modo-noche {
 .pantalla-inicio { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 50, 20, 0.85); z-index: 100; display: flex; justify-content: center; align-items: center; color: white; text-align: center; }
 #btnEmpezar { margin-top: 20px; padding: 15px 30px; font-size: 1.1em; border: none; border-radius: 25px; background-color: #fcd116; color: #000; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-/* --- CONTENEDOR PRINCIPAL: OPTIMIZADO PARA IPHONE (SCROLL) --- */
+/* --- CONTENEDOR PRINCIPAL: OPTIMIZADO PARA IPHONE Y SCROLL --- */
 .scratch-container { 
     position: relative; width: 90%; max-width: 360px; 
-    height: 75vh; /* Altura dinámica adaptable a cualquier pantalla */
-    min-height: 480px; max-height: 650px; 
+    height: calc(100dvh - 150px); /* Deja espacio arriba y abajo para los botones flotantes */
+    min-height: 450px; max-height: 650px; 
     border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
     background-color: #fffaf0; border: 4px solid #e5b13a; z-index: 10; transition: background-color 1s ease; 
 }
@@ -40,7 +41,7 @@ body.modo-noche {
     display: flex; flex-direction: column; align-items: center; text-align: center; 
     padding: 20px 15px 30px 15px; box-sizing: border-box; 
     overflow-y: auto; justify-content: flex-start;
-    -webkit-overflow-scrolling: touch; /* SÚPER IMPORTANTE: Permite deslizar suavemente en iPhone */
+    -webkit-overflow-scrolling: touch; /* SÚPER IMPORTANTE: Habilita el scroll nativo en iPhone */
 }
 
 .hidden-content::-webkit-scrollbar { width: 5px; } 
@@ -50,11 +51,11 @@ body.modo-noche {
 .firma { font-weight: bold; font-style: italic; color: #000; margin-bottom: 10px;}
 canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; touch-action: none; border-radius: 10px; }
 
-/* Cuadrícula para acomodar todos los botones en iPhone */
+/* CUADRÍCULA DE BOTONES PARA MÓVIL */
 .botones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 5px; padding-bottom: 30px;}
 .btn-sorpresa { padding: 12px 4px; background-color: #0b4b36; color: white; border: none; border-radius: 8px; font-size: 0.85em; font-weight: bold; cursor: pointer; z-index: 5; width: 100%; line-height: 1.2; word-wrap: break-word; }
 
-/* Modales y Textos */
+/* Modales */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); z-index: 200; justify-content: center; align-items: center; }
 .modal-content { background-color: #fffaf0; padding: 30px; border-radius: 15px; width: 85%; max-width: 320px; text-align: center; position: relative; border: 3px solid #0b4b36; }
 .cerrar { position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; color: inherit; cursor: pointer; }
@@ -70,7 +71,7 @@ canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index
 .btn-platillo { width: 100%; text-align: left; background-color: #fff; border: 1px solid #ccc; padding: 15px; margin-bottom: 10px; border-radius: 8px; font-family: inherit; color: #333; cursor: pointer; transition: 0.3s; font-weight: bold;}
 .btn-platillo:hover { background-color: #e5b13a; color: #fff; border-color: #e5b13a; }
 
-/* Menú de Besos (Corregido choque de clases) */
+/* Menú de Besos separados */
 .btn-beso { width: 100%; text-align: left; background-color: #fff; border: 2px solid #e84393; padding: 15px; margin-bottom: 10px; border-radius: 8px; font-family: inherit; color: #e84393; cursor: pointer; transition: 0.3s; font-weight: bold;}
 .btn-beso:hover { background-color: #e84393; color: #fff; }
 .secreto-bg { border-color: #ce1126; }
@@ -97,9 +98,9 @@ canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index
 .linea-conexion { position: absolute; bottom: 25px; left: 25px; width: 230px; height: 2px; background-color: #4ade80; transform-origin: left center; transform: rotate(-24.5deg); box-shadow: 0 0 10px #4ade80; animation: pulseLine 2s infinite; z-index: 1; }
 @keyframes pulseLine { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
-/* Botella Flotante (CORRECCIÓN: Fija en la pantalla, no choca) */
+/* Botella Flotante (CORRECCIÓN: Visibilidad segura en móviles) */
 .botella-flotante { 
-    position: fixed; top: 40%; left: -20%; font-size: 45px; cursor: pointer; z-index: 15; 
+    position: fixed; bottom: 100px; left: -20%; font-size: 45px; cursor: pointer; z-index: 50; 
     animation: flotarBotella 20s linear infinite, bobbing 2s ease-in-out infinite alternate; 
     transition: transform 0.2s; 
 }
